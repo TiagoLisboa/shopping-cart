@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   subtotal: 0,
   shipping: 0,
   total: 0,
