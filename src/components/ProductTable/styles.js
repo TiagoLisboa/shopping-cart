@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 900px;
-  background-color: #fff;
-  border-radius: 4px;
-  padding: 30px;
 
   table {
     width: 100%;

@@ -22,4 +22,11 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .App {
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
 `;
