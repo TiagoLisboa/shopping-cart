@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import cart from './cart/reducer';
-import coupon from './coupon/reducer';
+import coupons from './coupons/reducer';
 
 export default combineReducers({
   cart,
-  coupon
+  coupons
 })

@@ -16,7 +16,8 @@ export default function CouponInput() {
 
   const dispatch = useDispatch();
 
-  function handleNewCoupon() {
+  function handleNewCoupon(e) {
+    e.preventDefault();
     if (coupons[newCoupon]) {
       dispatch(addCoupon({ name: newCoupon, value: coupons[newCoupon] }));
     }
@@ -31,7 +32,7 @@ export default function CouponInput() {
         value={ newCoupon }
         onChange={ e => setNewCoupon(e.target.value) }
       />
-      <button>Apply</button>
+      <button type="submit">Apply</button>
     </CouponForm>
   );
 }
