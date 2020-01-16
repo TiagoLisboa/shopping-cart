@@ -37,6 +37,7 @@ export default function ProductTable() {
                 <div>
                   <button 
                     type="button"
+                    data-testid='decrease'
                     onClick={ () => handleProductUpdate({
                       ...product,
                       quantity: product.quantity - 1
@@ -46,6 +47,7 @@ export default function ProductTable() {
                   <input type="text" value={ product.quantity } readOnly/> kg 
                   <button
                     type="button"
+                    data-testid='increase'
                     onClick={ () => handleProductUpdate({
                       ...product,
                       quantity: product.quantity + 1
