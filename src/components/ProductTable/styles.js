@@ -13,7 +13,7 @@ export const Container = styled.div`
     border-bottom: 1px solid #eee;
 
     td {
-      padding: 30px;
+      padding: 20px;
       
       div {
         display: flex;
