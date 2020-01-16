@@ -15,5 +15,9 @@ export const Container = styled.div`
     tr.total {
       font-weight: bold;
     }
+
+    td:last-child {
+      text-align: right;
+    }
   }
 `;

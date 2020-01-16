@@ -27,5 +27,9 @@ export const Container = styled.div`
         }
       }
     }
+
+    td:last-child {
+      text-align: right;
+    }
   }
 `;
