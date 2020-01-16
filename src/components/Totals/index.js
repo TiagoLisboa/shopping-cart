@@ -33,19 +33,19 @@ export default function Totals() {
             <td>Subtotal</td>
             <td>
             </td>
-            <td>$ { subtotal }</td>
+            <td data-testid="subtotal">$ { subtotal }</td>
           </tr>
           <tr>
             <td>Shipping</td>
             <td>
             </td>
-            <td>$ { shipping }</td>
+            <td data-testid="shipping">$ { shipping }</td>
           </tr>
           <tr className="total">
             <td>Total</td>
             <td>
             </td>
-            <td>$ { total }</td>
+            <td data-testid="total">$ { total }</td>
           </tr>
         </tbody>
       </table>
