@@ -2,12 +2,14 @@ import React from 'react';
 
 import GlobalStyle from './styles/global';
 
-import ProductList from './componentes/ProductList';
+import ProductTable from './componentes/ProductTable';
+import CouponTable from './componentes/CouponTable';
 
 function App() {
   return (
     <div className="App">
-      <ProductList />
+      <ProductTable />
+      <CouponTable />
       <GlobalStyle />
     </div>
   );

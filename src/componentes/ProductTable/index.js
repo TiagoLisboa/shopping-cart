@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Container, ProductTable } from './styles';
+import { Container } from './styles';
 import { 
   FaPlusCircle,
   FaMinusCircle,
 } from 'react-icons/fa';
 
-export default function ProductList() {
+export default function ProductTable() {
   return (
     <Container>
-      <ProductTable>
+      <table>
         <tr>
           <td>Apple</td>
           <td>
@@ -21,7 +21,7 @@ export default function ProductList() {
           </td>
           <td>$ 60</td>
         </tr>
-      </ProductTable>
+      </table>
     </Container>
   );
 }
