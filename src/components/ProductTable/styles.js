@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 
+  h2 {
+    text-align: center;
+    padding: 10px 0 20px;
+    color: #666;
+  }
+  
+
   table {
     width: 100%;
     table-layout: fixed;

@@ -27,6 +27,7 @@ export default function ProductTable() {
 
   return (
     <Container>
+      <h2>Products</h2>
       <table>
         <tbody>
           {products.map(product => (

@@ -41,6 +41,7 @@ export default function CouponTable() {
   });
   return (
     <Container>
+      <h2>Coupons</h2>
       <table>
         <tbody>
           {coupons.map(coupon => (
