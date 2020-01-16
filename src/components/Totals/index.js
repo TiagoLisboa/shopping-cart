@@ -8,7 +8,7 @@ import { Container } from './styles';
 
 export default function Totals() {
   const subtotal = useSelector(state => state.totals.subtotal);
-  const shipping = useSelector(state => state.totals.shipping);
+  const shipping = useSelector(state => state.totals.shippingDiscounted);
   const subtotalDiscounted = useSelector(state => state.totals.subtotalDiscounted);
   const totalDiscount = useSelector(state => state.totals.totalDiscount)
   let total = subtotalDiscounted + shipping

@@ -52,7 +52,7 @@ export default function totals(state = initialState, action) {
       return {
         ...state,
         shippingDiscount: action.shippingDiscount,
-        shippingDiscounted: state.subtotal > 300.5 ? 0 : state.subtotal
+        shippingDiscounted: action.shippingDiscount && state.subtotal > 300.5 ? 0 : state.subtotal
       }
     case 'totals@UDATE_TOTAL_DISCOUNT':
       return {

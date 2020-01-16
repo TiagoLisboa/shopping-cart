@@ -18,21 +18,21 @@ export function updateTotal () {
   }
 }
 
-export function updateSubtotalDiscount() {
+export function updateSubtotalDiscount(discount) {
   return {
     type: 'totals@UDATE_SUBTOTAL_DISCOUNT',
-    subtotalDiscount: .3
+    subtotalDiscount: discount
   }
 }
-export function updateShippingDiscount() {
+export function updateShippingDiscount(discount) {
   return {
     type: 'totals@UDATE_SHIPPING_DISCOUNT',
-    shippingDiscount: true
+    shippingDiscount: discount
   }
 }
-export function updateTotalDiscount() {
+export function updateTotalDiscount(discount) {
   return {
     type: 'totals@UDATE_TOTAL_DISCOUNT',
-    totalDiscount: 100
+    totalDiscount: discount
   }
 }

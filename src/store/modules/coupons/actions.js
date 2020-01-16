@@ -4,3 +4,10 @@ export function addCoupon(coupon) {
     coupon
   }
 }
+
+export function removeCoupon(coupon) {
+  return {
+    type: 'coupon@REMOVE',
+    coupon
+  }
+}

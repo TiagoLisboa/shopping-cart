@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { removeCoupon } from '../../store/modules/coupons/actions'
+import { updateSubtotalDiscount, updateShippingDiscount, updateTotalDiscount } from '../../store/modules/totals/actions'
 
 import { Container } from './styles';
 
@@ -8,10 +11,31 @@ export default function CouponTable() {
   let coupons = useSelector(state => state.coupons);
   const totals = useSelector(state => state.totals);
 
+  const dispatch = useDispatch();
+
+  function handleRemoveCoupon (coupon) {
+    dispatch(removeCoupon(coupon));
+    if (coupon.name === "A") {
+      dispatch(updateSubtotalDiscount(0));
+    }
+    if (coupon.name === "FOO") {
+      dispatch(updateTotalDiscount(0));
+    }
+    if (coupon.name === "C") {
+      dispatch(updateShippingDiscount(false));
+    }
+  }
+
   coupons.map(coupon => {
     if (coupon.name === "A") coupon.discounted = totals.subtotal * totals.subtotalDiscount;
-    if (coupon.name === "FOO") coupon.discounted = totals.totalDiscounted;
-    if (coupon.name === "C") coupon.discounted = !totals.shippingDiscounted ? 'Applied' : 'Not Applied';
+    if (coupon.name === "FOO") { 
+      coupon.discounted = totals.total - totals.totalDiscount > 0
+        ? totals.totalDiscount
+        : totals.totalDiscount - (totals.totalDiscount - totals.total);
+    }
+    if (coupon.name === "C") { 
+      coupon.discounted = totals.shipping > 0 && !totals.shippingDiscounted ? 'Applied' : 'Not Applied';
+    }
 
     return coupon;
   });
@@ -24,7 +48,7 @@ export default function CouponTable() {
               <td>Coupon { coupon.name }</td>
               <td>
                 <div>
-                  <button type="button">REMOVE</button>
+                  <button type="button" onClick={() => handleRemoveCoupon(coupon)}>REMOVE</button>
                 </div>
               </td>
               <td>{ coupon.discounted } ({ coupon.value })</td>
