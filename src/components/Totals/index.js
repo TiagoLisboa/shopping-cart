@@ -9,18 +9,21 @@ import { Container } from './styles';
 export default function Totals() {
   const subtotal = useSelector(state => state.totals.subtotal);
   const shipping = useSelector(state => state.totals.shipping);
-  const total = useSelector(state => state.totals.totalDiscounted);
+  const subtotalDiscounted = useSelector(state => state.totals.subtotalDiscounted);
+  const totalDiscount = useSelector(state => state.totals.totalDiscount)
+  let total = subtotalDiscounted + shipping
+  total = total - totalDiscount > 0 ? total - totalDiscount : 0;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(updateShipping())
     dispatch(updateTotal())
-  }, [subtotal])
+  }, [subtotal, dispatch])
 
   useEffect(() => {
     dispatch(updateTotal())
-  }, [shipping])
+  }, [shipping, dispatch])
 
   return (
     <Container>

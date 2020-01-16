@@ -23,7 +23,7 @@ export default function ProductTable() {
     const subtotal = products.reduce((ac, p) => (ac += p.quantity * p.value), 0);
     const totalquantity = products.reduce((ac, p) => (ac += p.quantity), 0);
     dispatch(updateSubtotal({subtotal, totalquantity}));
-  }, [products])
+  }, [products, dispatch])
 
   return (
     <Container>

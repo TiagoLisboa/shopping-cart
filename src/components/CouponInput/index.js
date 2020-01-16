@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addCoupon } from '../../store/modules/coupon/actions';
+import { updateSubtotalDiscount, updateShippingDiscount, updateTotalDiscount } from '../../store/modules/totals/actions';
 
 import { CouponForm } from './styles';
 
 const coupons = {
-  'A': '30%',
-  'FOO': '$ 100',
-  'C': 'Free Shipping'
+  'A': ['30%', updateSubtotalDiscount],
+  'FOO': ['$ 100', updateTotalDiscount],
+  'C': ['Free Shipping', updateShippingDiscount]
 }
 
 export default function CouponInput() {
@@ -19,7 +20,8 @@ export default function CouponInput() {
   function handleNewCoupon(e) {
     e.preventDefault();
     if (coupons[newCoupon]) {
-      dispatch(addCoupon({ name: newCoupon, value: coupons[newCoupon] }));
+      dispatch(addCoupon({ name: newCoupon, value: coupons[newCoupon][0] }));
+      dispatch(coupons[newCoupon][1]());
     }
     setNewCoupon('');
   }

@@ -5,8 +5,16 @@ import { useSelector } from 'react-redux';
 import { Container } from './styles';
 
 export default function CouponTable() {
-  const coupons = useSelector(state => state.coupons);
+  let coupons = useSelector(state => state.coupons);
+  const totals = useSelector(state => state.totals);
 
+  coupons.map(coupon => {
+    if (coupon.name === "A") coupon.discounted = totals.subtotal * totals.subtotalDiscount;
+    if (coupon.name === "FOO") coupon.discounted = totals.totalDiscounted;
+    if (coupon.name === "C") coupon.discounted = !totals.shippingDiscounted ? 'Applied' : 'Not Applied';
+
+    return coupon;
+  });
   return (
     <Container>
       <table>
@@ -19,7 +27,7 @@ export default function CouponTable() {
                   <button type="button">REMOVE</button>
                 </div>
               </td>
-              <td>$ 57 ({ coupon.value })</td>
+              <td>{ coupon.discounted } ({ coupon.value })</td>
             </tr>
           ))}
         </tbody>

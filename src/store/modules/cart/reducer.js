@@ -17,7 +17,7 @@ export default function cart(state = defaultState, action) {
     case 'cart@UPDATE_QUANTITY':
       if (action.product.quantity < 0) return state;
       return state.map(product => {
-        if (product.name == action.product.name) {
+        if (product.name === action.product.name) {
           product = action.product;
         }
         return product;

@@ -20,21 +20,18 @@ export default function totals(state = initialState, action) {
         ...state,
         subtotal: action.subtotal,
         totalquantity: action.totalquantity,
-        subtotalDiscounted: action.subtotal - state.subtotalDiscount > 0
-          ? action.subtotal - state.subtotalDiscount
-          : 0
+        subtotalDiscounted: action.subtotal - state.subtotal * state.subtotalDiscount
       }
     case 'totals@UPDATE_SHIPPING':
-      let s = (state.subtotal > 400 || state.subtotal == 0) ? 0 : 30;
-      s = (s != 0 && state.totalquantity > 10)
+      let s = (state.subtotal > 400 || state.subtotal === 0) ? 0 : 30;
+      s = (s !== 0 && state.totalquantity > 10)
         ? s + Math.ceil((state.totalquantity - 10) / 5) * 7
         : s;
       return {
         ...state,
         shipping: s,
-        shippingDiscounted: s - state.shippingDiscount > 0
-          ? s - state.shippingDiscount
-          : 0
+        shippingDiscounted: state.shippingDiscount === true && state.subtotal > 300.5
+        ? 0 : s
       }
     case 'totals@UPDATE_TOTAL':
       const t = state.subtotalDiscounted + state.shippingDiscounted;
@@ -44,6 +41,23 @@ export default function totals(state = initialState, action) {
         totalDiscounted: t - state.totalDiscount > 0 
           ? t - state.totalDiscount
           : 0
+      }
+    case 'totals@UDATE_SUBTOTAL_DISCOUNT':
+      return {
+        ...state,
+        subtotalDiscount: action.subtotalDiscount,
+        subtotalDiscounted: state.subtotal - state.subtotal * action.subtotalDiscount
+      }
+    case 'totals@UDATE_SHIPPING_DISCOUNT':
+      return {
+        ...state,
+        shippingDiscount: action.shippingDiscount,
+        shippingDiscounted: state.subtotal > 300.5 ? 0 : state.subtotal
+      }
+    case 'totals@UDATE_TOTAL_DISCOUNT':
+      return {
+        ...state,
+        totalDiscount: action.totalDiscount
       }
     default:
       return state;
