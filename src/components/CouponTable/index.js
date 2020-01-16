@@ -12,7 +12,7 @@ export default function CouponTable() {
       <table>
         <tbody>
           {coupons.map(coupon => (
-            <tr>
+            <tr key={coupon.name}>
               <td>Coupon { coupon.name }</td>
               <td>
                 <div>
