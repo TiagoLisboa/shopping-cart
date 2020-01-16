@@ -27,7 +27,7 @@ export default function CouponInput() {
   }
 
   return (
-    <CouponForm onSubmit={ handleNewCoupon }>
+    <CouponForm onSubmit={ handleNewCoupon } data-testid='coupon-form'>
       <input
         type="text"
         placeholder="Coupon code"
