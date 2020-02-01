@@ -2,14 +2,33 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addCoupon } from '../../store/modules/coupons/actions';
-import { updateSubtotalDiscount, updateShippingDiscount, updateTotalDiscount } from '../../store/modules/totals/actions';
 
 import { CouponForm } from './styles';
 
 const coupons = {
-  'A': ['30%', updateSubtotalDiscount, .3],
-  'FOO': ['$ 100', updateTotalDiscount, 100],
-  'C': ['Free Shipping', updateShippingDiscount, true]
+	'A': {
+		text: ({ subtotal }) => (`30% (${subtotal * .3})`),
+		discount: (initial, totals) => ({
+			...initial,
+			subtotal: totals.subtotal * 0.3
+		})
+	},
+	'FOO': {
+		text: ({ total }) => (`$ 100 (${100 + Math.min(0, total - 100)})`),
+		discount: (initial, totals) => ({
+			...initial,
+			total: 100 + Math.min(0, totals.total - 100)
+		})
+	},
+	'C': {
+		text: ({ subtotal, shipping }) => (`Free Shipping (${
+			subtotal < 300.5 ? 0 : shipping
+		})`),
+		discount: (initial, totals) => ({
+			...initial,
+			shipping: totals.subtotal < 300.5 ? 0 : totals.shipping
+		})	
+	}
 }
 
 export default function CouponInput() {
@@ -20,8 +39,7 @@ export default function CouponInput() {
   function handleNewCoupon(e) {
     e.preventDefault();
     if (coupons[newCoupon]) {
-      dispatch(addCoupon({ name: newCoupon, value: coupons[newCoupon][0] }));
-      dispatch(coupons[newCoupon][1](coupons[newCoupon][2]));
+      dispatch(addCoupon({ name: newCoupon, ...coupons[newCoupon] }));
     }
     setNewCoupon('');
   }

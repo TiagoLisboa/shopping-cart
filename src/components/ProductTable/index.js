@@ -8,7 +8,6 @@ import {
 } from 'react-icons/fa';
 
 import { updateProductQuantity } from '../../store/modules/cart/actions';
-import { updateSubtotal } from '../../store/modules/totals/actions';
 
 export default function ProductTable() {
   const products = useSelector(state => state.cart);
@@ -18,12 +17,6 @@ export default function ProductTable() {
   function handleProductUpdate (product) {
     dispatch(updateProductQuantity(product));
   }
-
-  useEffect(() => {
-    const subtotal = products.reduce((ac, p) => (ac += p.quantity * p.value), 0);
-    const totalquantity = products.reduce((ac, p) => (ac += p.quantity), 0);
-    dispatch(updateSubtotal({subtotal, totalquantity}));
-  }, [products, dispatch])
 
   return (
     <Container>
