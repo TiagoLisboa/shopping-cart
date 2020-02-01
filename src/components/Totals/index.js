@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { updateTotals } from '../../store/modules/totals/actions'
-
 import { Container } from './styles';
 
 const values = {subtotal: 0, shipping: 0, total: 0};
@@ -19,18 +17,6 @@ export default function Totals() {
 	function calcTotal (totals, discounts) {
 		return totals.subtotal - discounts.subtotal + totals.shipping - discounts.shipping - discounts.total;
 	}
- 
-	useEffect(() => {
-		const subtotal = cart.reduce(
-			(subtotal, item) => (subtotal + item.quantity * item.value),
-			0
-		);
-		const quantity = cart.reduce((quantity, item) => quantity + item.quantity, 0);
-		let shipping = subtotal > 400 || subtotal == 0 ? 0 : 30;
-		shipping += quantity <= 10 ? 0 : 7 * Math.floor((quantity - 10) / 5);
-		const total = subtotal + shipping;
-		dispatch(updateTotals({subtotal, shipping, total}));
-  }, [cart, dispatch])
 
 	useEffect(() => {
 		let initial = values;
