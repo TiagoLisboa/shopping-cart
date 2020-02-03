@@ -8,6 +8,8 @@ import * as CouponActions from '../../../store/modules/coupons/actions';
 import * as TotalsActions from '../../../store/modules/totals/actions';
 import { initalState }  from '../../../store/modules/totals/reducer';
 
+import { coupons } from '../../CouponInput';
+
 jest.mock('react-redux');
 
 describe("Coupon Table", () => {
@@ -15,9 +17,7 @@ describe("Coupon Table", () => {
     useSelector.mockImplementation(cb =>
       cb({
         totals: {...initalState},
-        coupons: [{
-          name: 'A', value: '30%'
-        }]
+        coupons: [coupons['A']]
       })
     );
 
@@ -28,9 +28,7 @@ describe("Coupon Table", () => {
     const { getByTestId, getByText } = render(<CouponTable />);
 
     fireEvent.click(getByText('REMOVE'))
-    expect(dispatch.mock.calls[0][0]).toMatchObject(CouponActions.removeCoupon({
-      name: 'A', value: '30%'
-    }));
-    expect(dispatch).toHaveBeenNthCalledWith(2, TotalsActions.updateSubtotalDiscount(0));
+    expect(dispatch.mock.calls[0][0])
+			.toMatchObject(CouponActions.removeCoupon(coupons['A']));
   })
 });

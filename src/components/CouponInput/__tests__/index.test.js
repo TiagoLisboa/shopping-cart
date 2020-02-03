@@ -3,7 +3,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import CouponInput from '..';
+import CouponInput, { coupons } from '..';
 import * as CouponActions from '../../../store/modules/coupons/actions';
 import * as TotalsActions from '../../../store/modules/totals/actions';
 
@@ -24,10 +24,8 @@ describe("Coupon Input", () => {
     });
     fireEvent.submit(getByTestId('coupon-form'));
   
-    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(
-      { name: 'A', value: '30%' }));
+    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(coupons['A']));
 
-    expect(dispatch).toHaveBeenCalledWith(TotalsActions.updateSubtotalDiscount(.3));
   });
 
   it('should be able to input a coupon FOO', () => {
@@ -44,10 +42,8 @@ describe("Coupon Input", () => {
     });
     fireEvent.submit(getByTestId('coupon-form'));
   
-    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(
-      { name: 'FOO', value: '$ 100' }));
+    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(coupons['FOO']));
 
-    expect(dispatch).toHaveBeenCalledWith(TotalsActions.updateTotalDiscount(100));
   });
 
   it('should be able to input a coupon C', () => {
@@ -64,9 +60,7 @@ describe("Coupon Input", () => {
     });
     fireEvent.submit(getByTestId('coupon-form'));
   
-    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(
-      { name: 'C', value: 'Free Shipping' }));
+    expect(dispatch).toHaveBeenCalledWith(CouponActions.addCoupon(coupons['C']));
 
-    expect(dispatch).toHaveBeenCalledWith(TotalsActions.updateShippingDiscount(true));
   });
 })

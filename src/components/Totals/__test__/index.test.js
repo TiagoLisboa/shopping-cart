@@ -10,13 +10,17 @@ jest.mock('react-redux');
 describe("Totals Table", () => {
   it('should be able to see subtotal, shipping and total values', () => {
     useSelector.mockImplementation(cb => cb({
-      totals: {
-        subtotal: 666,
-        shippingDiscounted: 30,
-        total: 696,
-        totalDiscount: 0,
-        subtotalDiscounted: 666
-      }
+      cart: [{
+        name: 'Apple',
+        quantity: 1,
+        value: 60
+      }],
+			totals: {
+				subtotal: 60,
+				shipping: 30,
+				total: 90
+			},
+			coupons: []
     }))
 
     const dispatch = jest.fn();
@@ -25,9 +29,9 @@ describe("Totals Table", () => {
 
     const { getByTestId, getByText } = render(<Totals />);
 
-    expect(getByTestId('subtotal')).toContainElement(getByText('$ 666'));
+    expect(getByTestId('subtotal')).toContainElement(getByText('$ 60'));
     expect(getByTestId('shipping')).toContainElement(getByText('$ 30'));
-    expect(getByTestId('total')).toContainElement(getByText('$ 696'));
+    expect(getByTestId('total')).toContainElement(getByText('$ 90'));
 
   })
 })

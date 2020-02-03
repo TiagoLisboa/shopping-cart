@@ -5,8 +5,9 @@ import { addCoupon } from '../../store/modules/coupons/actions';
 
 import { CouponForm } from './styles';
 
-const coupons = {
+export const coupons = {
 	'A': {
+		name: 'A',
 		text: ({ subtotal }) => (`30% (${subtotal * .3})`),
 		discount: (initial, totals) => ({
 			...initial,
@@ -14,6 +15,7 @@ const coupons = {
 		})
 	},
 	'FOO': {
+		name: 'FOO',
 		text: ({ total }) => (`$ 100 (${100 + Math.min(0, total - 100)})`),
 		discount: (initial, totals) => ({
 			...initial,
@@ -21,6 +23,7 @@ const coupons = {
 		})
 	},
 	'C': {
+		name: 'C',
 		text: ({ subtotal, shipping }) => (`Free Shipping (${
 			subtotal < 300.5 ? 0 : shipping
 		})`),
@@ -39,7 +42,7 @@ export default function CouponInput() {
   function handleNewCoupon(e) {
     e.preventDefault();
     if (coupons[newCoupon]) {
-      dispatch(addCoupon({ name: newCoupon, ...coupons[newCoupon] }));
+      dispatch(addCoupon(coupons[newCoupon]));
     }
     setNewCoupon('');
   }
